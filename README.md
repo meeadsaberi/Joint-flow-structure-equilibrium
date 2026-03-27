@@ -82,7 +82,7 @@ The Sioux Falls network is a standard benchmark dataset widely used in transport
 
 ## License
 
-[Add your preferred license, e.g. MIT]
+MIT License
 
 ## Acknowledgements
 
