@@ -12,7 +12,7 @@ The paper develops a transportation network framework that distinguishes three r
 2. **Equilibrium admissibility**: Whether the unregulated network equilibrium itself satisfies those boundaries.
 3. **Endogenous structural adjustment**: Where a slower-moving structural state, such as fleet electrification, settles when it responds to network outcomes.
 
-The Sioux Falls application is an illustrative computational example used to reproduce the numerical results in the paper. The ecological ceiling is represented by a system tailpipe-emissions limit and the social floor by minimum accessibility requirements. These are transport-system representations of upper and lower bounds and are not claimed to be globally downscaled planetary boundaries.
+The Sioux Falls application is an illustrative computational example used to reproduce the numerical results in the paper. The ecological ceiling is represented by a system tailpipe emissions limit and the social floor by minimum accessibility requirements. They provide a simplified transport system representation of the safe and just extension of the planetary boundaries framework, with an upper ecological ceiling and a lower social floor.
 
 ## Repository contents
 
