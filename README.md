@@ -1,94 +1,124 @@
-# Joint Flow–Structure Equilibrium Model with Environmental and Social Constraints
+# Joint Flow–Structure Equilibrium under Ecological Ceilings and Social Floors
 
-This repository contains the code accompanying the paper:
+This repository contains the reproducibility code accompanying the working paper:
 
-> *Urban Transportation Economics Under Planetary Boundaries*  
-> *Meead Saberi*
+> **Urban Transportation Economics Under Planetary Boundaries**  
+> Meead Saberi  
+> Working paper, UNSW Sydney, 2026.
 
-The project implements a joint flow–structure equilibrium model on the Sioux Falls network, incorporating:
-- congestion-dependent travel costs,
-- endogenous technology adoption (EV share),
-- emissions constraints (ecological ceiling),
-- accessibility constraints (social floor).
+The paper develops a transportation-network framework that distinguishes three related questions:
 
-## Overview
+1. **Structural feasibility** — whether at least one allocation can satisfy an ecological ceiling and social floors at a given structural state.
+2. **Equilibrium admissibility** — whether the unregulated network equilibrium itself satisfies those boundaries.
+3. **Endogenous structural adjustment** — where a slower-moving structural state, such as fleet electrification, settles when it responds to network outcomes.
 
-The model integrates:
-- **User equilibrium traffic assignment** (two user classes)
-- **Endogenous EV adoption dynamics**
-- **Environmental feasibility** via emissions constraints
-- **Distributional analysis** via accessibility floors
+The Sioux Falls application is an illustrative computational example used to reproduce the numerical results in the paper. The ecological ceiling is represented by a system tailpipe-emissions limit and the social floor by minimum accessibility requirements. These are transport-system representations of upper and lower bounds and are not claimed to be globally downscaled planetary boundaries.
 
-The equilibrium is computed as a fixed point between:
-- network flows given EV share, and
-- EV share given emissions.
+## Repository contents
 
-## Requirements
+- `SiouxFalls_implementation_of_the_joint_flow_structure_equilibrium_problem_v2.ipynb` — self-contained reproducibility notebook for the revised Sioux Falls application.
+- `LICENSE` — MIT License.
+- `CITATION.cff` — citation metadata for the repository.
+- `requirements.txt` — Python dependencies.
 
-- Python 3.9+
-- numpy
-- pandas
-- matplotlib
-- networkx
-- scipy
+The notebook writes the verified model implementation to temporary local Python modules during execution so that the repository can remain compact while the numerical workflow stays readable.
 
-## How to run
+## What the revised notebook implements
 
-The code is organized sequentially following the paper.
+The current implementation matches the revised paper and includes:
 
-### Step-by-step execution
+- the standard Sioux Falls network with 24 nodes, 76 directed links, 528 OD pairs, and 360,600 baseline trips;
+- BPR congestion functions;
+- pseudo-lengths constructed from free-flow travel times to maintain consistency between time, speed, operating cost, and emissions;
+- two origin-based user groups, peripheral and central;
+- four commodities defined by user class and vehicle technology, ICE and EV;
+- heterogeneous values of time and vehicle operating costs;
+- fixed and elastic OD demand;
+- speed-dependent ICE tailpipe emissions;
+- group-specific accessibility floors;
+- an endogenous EV-share structural response;
+- equilibrium-admissibility thresholds `s_E`;
+- stationary structural states `s_star`;
+- use-stage emissions pricing with fixed and endogenous structure;
+- robustness and sensitivity calculations used in the paper.
 
-1. **Load data and network**  
-   Run Section 6.1
-2. **Initialize behavioral + technological model**  
-   Run Section 6.2
-3. **Solve joint flow–structure equilibrium**  
-   Run Section 6.3
-4. **Analyze technological change and dynamics**  
-   Run Section 6.4
-5. **Evaluate accessibility and social floor**  
-   Run Section 6.5
-6. **Run pricing experiments**  
-   Run Section 6.6
+The network assignment is solved using a potential-based Frank–Wolfe formulation where applicable, with direct equilibrium checks for priced cases. Scalar thresholds and stationary structural states are located using one-dimensional root searches.
 
-The code is designed to run in order (e.g., in a Jupyter notebook or Google Colab).
+## Reproducing the paper results
 
-## Outputs
+### 1. Install dependencies
 
-The model generates:
+```bash
+pip install -r requirements.txt
+```
 
-### CSV files
-- sioux_falls_joint_equilibrium_summary.csv  
-- sioux_falls_tech_scan.csv  
-- sioux_falls_tech_dynamics.csv  
-- sioux_falls_social_floor_scan_revised.csv  
-- sioux_falls_pricing_social_floor_revised.csv  
+### 2. Run the notebook
 
-### Figures
-- Accessibility decay functions  
-- Emissions vs speed (U-shaped relationship)  
-- Adoption map  
-- Congestion and cost functions  
-- Network flow visualizations  
+Open `SiouxFalls_implementation_of_the_joint_flow_structure_equilibrium_problem_v2.ipynb` in JupyterLab, Jupyter Notebook, VS Code, or Google Colab and run all cells from top to bottom.
+
+The notebook automatically downloads the standard Sioux Falls network, trips, and node files from the Transportation Networks repository maintained by Hillel Bar-Gera and collaborators.
+
+### 3. Outputs
+
+The notebook reproduces the main numerical objects reported in Section 6 of the paper, including:
+
+- fixed- versus elastic-demand equilibrium-admissibility thresholds and stationary EV shares;
+- the response of `s_E` and `s_star` to tighter emissions ceilings;
+- emissions and accessibility along the structural axis;
+- the reduced structural residual `R(s)`;
+- pricing results with fixed structure;
+- pricing results when the same use-stage price also affects vehicle choice;
+- robustness calculations for demand elasticity and structural-response assumptions.
+
+Generated tables and figures are written to the local `results/` directory when the notebook is run.
+
+The notebook also contains numerical assertions against the manuscript values. These checks are intentionally tolerant only to small numerical and rounding differences so that implementation drift is visible.
+
+## Interpretation of the example
+
+The Sioux Falls application is a transparent benchmark illustration rather than an empirical model of Sioux Falls. In particular, the benchmark `length` field does not provide independent geographical link lengths, so pseudo-lengths are constructed from free-flow travel times. Results should therefore be interpreted as network-level computational illustrations of the framework rather than calibrated forecasts.
+
+The emissions ceiling and accessibility floors are illustrative transport-system bounds. The paper uses the planetary-boundaries framework as an organizing principle for ecological limits together with its safe-and-just extension incorporating social foundations; the numerical thresholds are not presented as formally downscaled planetary boundaries.
 
 ## Data
 
-The Sioux Falls network is a standard benchmark dataset widely used in transportation research, obtained from https://github.com/bstabler/transportationnetworks
+The Sioux Falls data are obtained from the Transportation Networks repository:
 
-## Notes
+https://github.com/bstabler/TransportationNetworks
 
-- The model is numerical and does not enforce all theoretical convexity and monotonicity assumptions globally.  
-- Results should be interpreted as a computational illustration of the theoretical framework.  
+The notebook downloads the required files directly when they are not already available locally.
+
+## Citation
+
+If you use this code or the framework, please cite the accompanying working paper:
+
+> Saberi, M. (2026). *Urban Transportation Economics Under Planetary Boundaries*. Working paper, UNSW Sydney.
+
+BibTeX:
+
+```bibtex
+@unpublished{Saberi2026PlanetaryBoundaries,
+  author = {Saberi, Meead},
+  title  = {Urban Transportation Economics Under Planetary Boundaries},
+  year   = {2026},
+  note   = {Working paper, UNSW Sydney}
+}
+```
+
+## Status
+
+This repository corresponds to the revised working-paper version of the model and supersedes the earlier Sioux Falls implementation previously hosted here.
 
 ## License
 
-MIT License
+MIT License. See `LICENSE`.
 
-## Acknowledgements
+## Acknowledgement
 
-This research was supported by an Australian Research Council Future Fellowship (FT250100584).
+This research is supported by an Australian Research Council Future Fellowship (FT250100584).
 
 ## Contact
 
-Meead Saberi at the University of New South Wales
-Email: meead.saberi@unsw.edu.au
+Meead Saberi  
+University of New South Wales (UNSW Sydney)  
+meead.saberi@unsw.edu.au

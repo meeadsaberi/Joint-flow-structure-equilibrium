@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the accompanying working paper: Saberi, M. (2026), Urban Transportation Economics Under Planetary Boundaries, UNSW Sydney."
+title: "Joint Flow–Structure Equilibrium under Ecological Ceilings and Social Floors"
+type: software
+authors:
+  - family-names: Saberi
+    given-names: Meead
+year: 2026
+repository-code: "https://github.com/meeadsaberi/Joint-flow-structure-equilibrium"
+license: MIT
+version: "2.0"
+keywords:
+  - transportation network equilibrium
+  - planetary boundaries
+  - accessibility
+  - emissions
+  - electric vehicles
+  - Sioux Falls
