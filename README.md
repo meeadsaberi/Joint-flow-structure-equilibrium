@@ -6,7 +6,7 @@ This repository contains the reproducibility code accompanying the working paper
 > Meead Saberi  
 > Working paper, UNSW Sydney, 2026.
 
-The paper develops a transportation-network framework that distinguishes three related questions:
+The paper develops a transportation network framework that distinguishes three related questions:
 
 1. **Structural feasibility** — whether at least one allocation can satisfy an ecological ceiling and social floors at a given structural state.
 2. **Equilibrium admissibility** — whether the unregulated network equilibrium itself satisfies those boundaries.
