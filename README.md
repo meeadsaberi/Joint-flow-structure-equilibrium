@@ -23,9 +23,9 @@ The Sioux Falls application is an illustrative computational example used to rep
 
 The notebook writes the verified model implementation to temporary local Python modules during execution so that the repository can remain compact while the numerical workflow stays readable.
 
-## What the revised notebook implements
+## What the notebook implements
 
-The current implementation matches the revised paper and includes:
+The implementation matches the paper and includes:
 
 - the standard Sioux Falls network with 24 nodes, 76 directed links, 528 OD pairs, and 360,600 baseline trips;
 - BPR congestion functions;
@@ -39,10 +39,10 @@ The current implementation matches the revised paper and includes:
 - an endogenous EV-share structural response;
 - equilibrium-admissibility thresholds `s_E`;
 - stationary structural states `s_star`;
-- use-stage emissions pricing with fixed and endogenous structure;
+- road usage emissions pricing with fixed and endogenous structure;
 - robustness and sensitivity calculations used in the paper.
 
-The network assignment is solved using a potential-based Frank–Wolfe formulation where applicable, with direct equilibrium checks for priced cases. Scalar thresholds and stationary structural states are located using one-dimensional root searches.
+The network assignment is solved using a Frank–Wolfe algorithm where applicable, with direct equilibrium checks for priced cases. Scalar thresholds and stationary structural states are located using one-dimensional root searches.
 
 ## Reproducing the paper results
 
@@ -76,9 +76,9 @@ The notebook also contains numerical assertions against the manuscript values. T
 
 ## Interpretation of the example
 
-The Sioux Falls application is a transparent benchmark illustration rather than an empirical model of Sioux Falls. In particular, the benchmark `length` field does not provide independent geographical link lengths, so pseudo-lengths are constructed from free-flow travel times. Results should therefore be interpreted as network-level computational illustrations of the framework rather than calibrated forecasts.
+The Sioux Falls application is a benchmark illustration only. In particular, the benchmark `length` field does not provide independent geographical link lengths, so pseudo-lengths are constructed from free-flow travel times. Results should therefore be interpreted as network-level computational illustrations of the framework.
 
-The emissions ceiling and accessibility floors are illustrative transport-system bounds. The paper uses the planetary-boundaries framework as an organizing principle for ecological limits together with its safe-and-just extension incorporating social foundations; the numerical thresholds are not presented as formally downscaled planetary boundaries.
+The emissions ceiling and accessibility floors are also illustrative transport system bounds. The paper uses the planetary boundaries framework as a principle for ecological limits with its safe-and-just extension incorporating social foundations.
 
 ## Data
 
@@ -104,10 +104,6 @@ BibTeX:
   note   = {Working paper, UNSW Sydney}
 }
 ```
-
-## Status
-
-This repository corresponds to the revised working-paper version of the model and supersedes the earlier Sioux Falls implementation previously hosted here.
 
 ## License
 
